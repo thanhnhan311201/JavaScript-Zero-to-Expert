@@ -32,13 +32,13 @@ let first_person_name = "Nhan"
 - Tên biến trong JavaScript chỉ chứa các ký tự bao gồm: chữ số, chữ cái, "\_", "$".
 - Một điều lưu ý khi đặt tên trong JavaScript là không được đặt tên bắt đầu bắt chữ số.
 
-Cách đặt tên sai:
+Cách đặt tên biến sai:
 
 ```
 let 3years = 3;
 ```
 
-Thay vào đó:
+Cách đặt tên biến đúng:
 
 ```
 let threeYears = 3;
@@ -46,14 +46,14 @@ let threeYears = 3;
 
 - Ngoài ra chúng ta không nên đặt tên biến trùng với từ khóa riêng của JavaScript, muốn đặt tên trùng với từ khóa đó chúng ta nên thêm dấu "\_" hoặc "$" trước tên biến.
 
-Cách đặt tên sai:
+Cách đặt tên biến sai:
 
 ```
 let new = "shoes";
 let function = "change the number";
 ```
 
-Thay vào đó:
+Cách đặt tên biến đúng:
 
 ```
 let _new = "shoes";
@@ -70,14 +70,14 @@ let PI = 3.1415;
 
 - Một lưu ý cuối cùng là chúng ta phải đặt tên biến phải thật sự có ý nghĩa, nó phải có liên quan tới giá trị mà nó lưu giữ, không nên đặt tên biến lan man.
 
-Đặt tên biến sai:
+Cách đặt tên biến sai:
 
 ```
 let job1 = "Programmer";
 let job2 = "Teacher";
 ```
 
-Đặt tên biến đúng:
+Cách đặt tên biến đúng:
 
 ```
 let firstJob = "Programmer";
