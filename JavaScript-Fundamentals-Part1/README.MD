@@ -2,11 +2,11 @@
 
 ## 1. JavaScript là gì?
 
-- Theo Jonas Schmedtmann:"JavaScript is a high-level, object-oriented, multi-paradigm programming language."
+- Theo Jonas Schmedtmann:"JavaScript is a high-level, object-oriented, multi-paradigm programming language".
 - JavaScript là ngôn ngữ lập trình thông dịch với khả năng hướng đối tượng. Được phát triển bởi Brendan Eich vào năm 1995, là một trong những ngôn ngữ chính để lập trình web và vô vùng phổ biến với các web developer.
 - JavaScript được tạo ra cho phát triển các trang web động. Một chương trình JS được gọi là script, nó có thể được đính kèm vời bất kỳ trang web HTML nào. Các script sẽ tự động chạy khi trang được tải.
 
-## 2. Các quy ước khai báo biến trong JavaScript.
+## 2. Các quy ước khai báo biến trong JavaScript
 
 - Trong JavaScript, chúng ta nên đặt tên các biến theo quy chuẩn camelCase.
 - Theo quy tắc camelCase nếu chúng ta đặt tên biến chỉ có 1 từ thì chúng ta lên viết thường.
@@ -83,3 +83,13 @@ Cách đặt tên biến đúng:
 let firstJob = "Programmer";
 let currentJob = "Teacher";
 ```
+
+## 3. Các loại dữ liệu trong JavaScript
+
+Trong JavaScript có 2 kiểu dữ liệu chính: _object_ và _primitive_.
+
+### Kiểu dữ liệu Primitive (dữ liệu nguyên thủy)
+
+**Primitive Value** hay còn được gọi là dữ liệu nguyên thủy bao gồm 7 kiểu dữ liệu: _number_, _string_, _boolean_, _undefined_, _null_, _symbol_, _bigint_.
+
+#### a. Number
