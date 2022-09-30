@@ -23,6 +23,9 @@
     - [Toán tử gán](#toán-tử-gán)
     - [Toán tử so sánh](#toán-tử-so-sánh)
     - [Toán tử luận lý](#toán-tử-luận-lý)
+  - [6. Thứ tự ưu tiên các toán tử trong JavaScript](#6-thứ-tự-ưu-tiên-các-toán-tử-trong-javascript)
+  - [7. Template Literals](#7-template-literals)
+  - [8. Biểu thức điều kiện (If / Else Statements)](#8-biểu-thức-điều-kiện-if--else-statements)
 
 # Lý thuyết nền tảng về JavaScript
 
@@ -506,3 +509,87 @@ console.log(! true);
 ```
 
 ![](/Screenshots/JS_Fun_Part1/not.png)
+
+## 6. Thứ tự ưu tiên các toán tử trong JavaScript
+
+![](/Screenshots/JS_Fun_Part1/operator_precedence.png)
+
+- Trong JavaScript khi thực hiện một dòng lệnh, nó sẽ tìm kiếm các phép toán tử có trong dòng lệnh đó sau đó dựa vào thứ tự ưu tiên của các phép toán tử (hình trên) để quyết định xem nên thực hiện phép toán tử nào trước.
+
+```
+console.log(10 - 5 > 10 - 2);
+```
+
+![](/Screenshots/JS_Fun_Part1/not.png)
+
+Trong câu lệnh trên có 2 phép toán tử là trừ và so sánh lớn hơn, dựa vào bảng thứ tự ưu tiên thấy được phép trừ có thứ tự ưu tiên cao hơn (tham khảo hình trên) nên đã được thực hiện trước phép toán tử so sánh lớn hơn. Do đó kết quả của câu lệnh trên là **false**.
+
+## 7. Template Literals
+
+- Trong JavaScript, khi chúng ta muốn nối các chuỗi với nhau hoặc nối các chuỗi với số thì chúng ta sẽ sử dụng toán tử cộng, tuy nhiên để giúp cho dòng lệnh được gọn gàng hơn thì chúng ta có thể sử dụng _template literals_ (string template) bằng cách sử dụng cặp dấu **``**.
+
+```
+const name = "Nhan";
+const age = 21;
+const job = "Sofware Developer";
+
+console.log("I'm " + name + ", a " + age + " years old " + job);
+console.log(`I'm ${name}, a ${age} years old ${job}`);
+```
+
+![](/Screenshots/JS_Fun_Part1/template_literals_1.png)
+
+- Ngoài ra chúng ta có thể sử dụng cặp dấu **``** để thay thể cho dấu ngoặc đơn và ngoặc kép khi muốn biểu diễn string.
+
+```
+const introduction = `I'm Nhan, a 21 years old Sofware Developer`;
+console.log(introduction);
+```
+
+![](/Screenshots/JS_Fun_Part1/template_literals_2.png)
+
+- Khi chúng ta muốn biểu diễn một chuỗi câu nhiều dòng, ngoài cách sử dụng lệnh xuống dòng chúng tả cũng có thể sử dụng _template literals_ để thực hiện điều đó.
+
+```
+console.log("I'm Nhan,\n\
+a 21 years old\n\
+Sofware Developer");
+console.log(`I'm Nhan,
+a 21 years old
+Sofware Developer`);
+```
+
+![](/Screenshots/JS_Fun_Part1/template_literals_3.png)
+
+- Bên cạnh đó _template literals_ rất hữu dụng khi chúng ta muốn tạo các mẫu html để thêm vào trang web.
+
+## 8. Biểu thức điều kiện (If / Else Statements)
+
+- Cấu trúc:
+
+```
+if (condition) {
+  statements...
+} else if (condition) {
+  statements...
+} else {
+  statements...
+}
+```
+
+- Khi các điều kiện của các biểu thức _if_ và _else if_ là **true** thì các câu lệnh nằm trong các block tương ứng với biểu thức đúng sẽ được thực hiện, nếu có một biểu thức là **false** thì JavaScript sẽ skip biểu thức đó và chuyển sang xét biểu thức tiếp theo, nếu tất cả các biểu thức đều sai thì biểu thức _else_ sẽ được thực hiện.
+- Một điều lưu ý biểu thức _else if_ và _else_ có thể có hoặc có thể không.
+- Ví dụ:
+
+```
+const age = 18;
+
+if (age >= 18) {
+  console.log("You can start driving license.");
+} else {
+  const yearLeft = 18 - age;
+  console.log(`You is too young. Wait another ${yearLeft} years.`);
+}
+```
+
+![](/Screenshots/JS_Fun_Part1/if_else_output.png)
