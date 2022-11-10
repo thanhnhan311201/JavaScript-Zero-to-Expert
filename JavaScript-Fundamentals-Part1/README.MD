@@ -22,10 +22,22 @@
     - [Toán tử toán học](#toán-tử-toán-học)
     - [Toán tử gán](#toán-tử-gán)
     - [Toán tử so sánh](#toán-tử-so-sánh)
+    - [Toán tử so sánh bằng](#toán-tử-so-sánh-bằng)
+      - [Toán tử so sánh bằng "lỏng lẻo" (==)](#toán-tử-so-sánh-bằng-lỏng-lẻo-)
+      - [Toán tử so sánh bằng "nghiêm ngặt" (===)](#toán-tử-so-sánh-bằng-nghiêm-ngặt-)
     - [Toán tử luận lý](#toán-tử-luận-lý)
   - [6. Thứ tự ưu tiên các toán tử trong JavaScript](#6-thứ-tự-ưu-tiên-các-toán-tử-trong-javascript)
   - [7. Template Literals](#7-template-literals)
   - [8. Biểu thức điều kiện (If / Else Statements)](#8-biểu-thức-điều-kiện-if--else-statements)
+  - [9. Type Conversion and Coercion](#9-type-conversion-and-coercion)
+    - [Type Conversion](#type-conversion)
+      - [Convert string to number](#convert-string-to-number)
+      - [Convert number to string](#convert-number-to-string)
+      - [Convert boolean to number or string](#convert-boolean-to-number-or-string)
+      - [Convert to boolean](#convert-to-boolean)
+    - [Type Coercion](#type-coercion)
+  - [10. Switch Stament](#10-switch-stament)
+  - [11. Condition Operator](#11-condition-operator)
 
 # Lý thuyết nền tảng về JavaScript
 
@@ -143,9 +155,10 @@ let firstName = 'Nhan';
 
 #### c. Boolean
 
-- Boolean là kiểu dữ liệu logic có thể nhận một trong hai giá trị là _true_ hoặc _false_.
-- Boolean được sử dụng để đưa ra quyết định.
-- Cách khai báo"
+- _Boolean_ là kiểu dữ liệu logic có thể nhận một trong hai giá trị là _true_ hoặc _false_.
+- _Boolean_ được sử dụng để đưa ra quyết định.
+- Kiểu dữ liệu _boolean_ được chia ra làm 2 loại là _falsy values_ (false, 0, null, underfined, NaN, "") và _trutly values_ (true, các dữ liệu còn lại).
+- Cách khai báo:
 
 ```
 let fullAge = true;
@@ -378,58 +391,6 @@ x **= y;
 
 ### Toán tử so sánh
 
-- Toán tử so sánh bằng
-
-```
-let x = 20;
-let y = 21;
-let z = x == y;
-console.log(z);
-```
-
-![](/Screenshots/JS_Fun_Part1/equal_to.png)
-
-- Toán tử so sánh bằng "nghiêm ngặt"
-
-```
-let x = 20;
-let y = "20";
-let z = x == y;
-let j = x === y;
-console.log(z);
-console.log(j);
-```
-
-![](/Screenshots/JS_Fun_Part1/equal_value_type.png)
-
-Toán tử "==" trả về đúng vì chuỗi "20" được chuyển thành số 20 trước khi việc so sánh được thực hiện. Trong khi "===" cho thấy rằng đây là 2 kiểu dữ liệu khác nhau nên trả về sai.
-
-- Toán tử so sánh không bằng
-
-```
-let x = 20;
-let y = 21;
-let z = x != y;
-console.log(z);
-```
-
-![](/Screenshots/JS_Fun_Part1/not_equal_to.png)
-
-- Toán tử so sánh không bằng "nghiêm ngặt" (not equal value or not equal type)
-
-```
-let x = 20;
-let y = "20";
-let z = x != y;
-let j = x !== y;
-console.log(z);
-console.log(j);
-```
-
-![](/Screenshots/JS_Fun_Part1/not_equal_value_type.png)
-
-Toán tử "!=" trả về sai vì chuỗi "20" được chuyển thành số 20 trước khi việc so sánh được thực hiện. Trong khi "!==" cho thấy rằng đây là 2 số bằng nhau tuy nhiên khác kiểu dữ liệu nên trả về đúng.
-
 - Toán tử so sánh lớn hơn
 
 ```
@@ -483,6 +444,70 @@ console.log(z);
 ```
 
 ![](/Screenshots/JS_Fun_Part1/ternary.png)
+
+### Toán tử so sánh bằng
+
+#### Toán tử so sánh bằng "lỏng lẻo" (==)
+
+- Trong JavaScript, toán tử so sánh bằng "lỏng lẻo" có thực hiện cơ chế ép kiểu cưỡng chế ([type coercion](#type-coercion)) khi có sự khác nhau về kiểu dữ liệu giữa 2 giá trị.
+- Ví dụ khi chúng ta so sánh chuỗi "18" và số 18 thì so sánh bằng "lỏng lẻo" sẽ tự động ép kiểu chuỗi "18" thành số 18 và kết quả trả về của phép so sánh là _true_.
+- Phép so sánh này đôi khi sẽ gây một số _bug_ cho đoạn code, cho nên hãy cân nhắc khi sử dụng.
+- Toán tử so sánh bằng:
+
+```
+let x = 20;
+let y = 21;
+let z = x == y;
+console.log(z);
+```
+
+![](/Screenshots/JS_Fun_Part1/equal_to.png)
+
+- Toán tử so sánh không bằng:
+
+```
+let x = 20;
+let y = 21;
+let z = x != y;
+console.log(z);
+```
+
+![](/Screenshots/JS_Fun_Part1/not_equal_to.png)
+
+#### Toán tử so sánh bằng "nghiêm ngặt" (===)
+
+- Trái ngược lại với so sánh bằng "lỏng lẻo", thì so sánh bằng "nghiêm ngặt" sẽ không thực hiện cơ chế ép kiểu cưỡng chế ([type coercion](#type-coercion)), do đó về mặt ý nghĩa sẽ phù hợp hơn trong một phép so sánh.
+- Trong thực tế chúng ta nên sử dụng phép so sánh này vì nó sẽ đảm bảo về tính đúng và ý nghĩa của phép so sánh, và đồng thời cũng tránh phát sinh ra các _bug_ khó hiểu trong quá trình lập trình.
+- Nếu chúng ta cần ép kiểu để so sánh giữa 2 giá trị khác nhau về kiểu dữ liệu thì chúng ta nên thực hiện phép ép kiểu thông thường ([type conversion](#type-conversion)) trước khi so sánh.
+- Toán tử so sánh bằng "nghiêm ngặt":
+
+```
+let x = 20;
+let y = "20";
+let z = x == y;
+let j = x === y;
+console.log(z);
+console.log(j);
+```
+
+![](/Screenshots/JS_Fun_Part1/equal_value_type.png)
+
+Toán tử "==" trả về đúng vì chuỗi "20" được chuyển thành số 20 trước khi việc so sánh được thực hiện. Trong khi "===" cho thấy rằng đây là 2 kiểu dữ liệu khác nhau nên trả về sai.
+
+- Toán tử so sánh không bằng "nghiêm ngặt" (not equal value or not equal type):
+
+```
+let x = 20;
+let y = "20";
+let z = x != y;
+let j = x !== y;
+console.log(z);
+console.log(j);
+```
+
+![](/Screenshots/JS_Fun_Part1/not_equal_value_type.png)
+
+Toán tử "!=" trả về sai vì chuỗi "20" được chuyển thành số 20 trước khi việc so sánh được thực hiện. Trong khi "!==" cho thấy rằng đây là 2 số bằng nhau tuy nhiên khác kiểu dữ liệu nên trả về đúng.
 
 ### Toán tử luận lý
 
@@ -593,3 +618,155 @@ if (age >= 18) {
 ```
 
 ![](/Screenshots/JS_Fun_Part1/if_else_output.png)
+
+## 9. Type Conversion and Coercion
+
+JavaScript chỉ có thể chuyển đổi thành ba kiểu: _number_, _string_, _boolean_, không thể chuyển đổi thành _underfined_ hoặc _null_.
+
+### Type Conversion
+
+#### Convert string to number
+
+Trong JavaScript chúng ta có các kiểu ép kiểu số sau đây:
+
+- Ép chuỗi số ("3.14") thành số (3.14)
+- Ép chuỗi rỗng ("") thành số 0
+- Ép chuỗi kí tự ("name") thành **NaN** (Not a Number)
+
+```
+console.log(Number("3.14"));
+console.log(Number(" "));
+console.log(Number(""));
+
+console.log(Number("3.14 3.14"));
+console.log(Number("name"));
+```
+
+![](/Screenshots/JS_Fun_Part1/string_2_number.png)
+
+#### Convert number to string
+
+```
+console.log(String(3.14));
+console.log(String(100 + 23))
+
+console.log((3.14).toString())
+console.log((100 + 23).toString())
+```
+
+![](/Screenshots/JS_Fun_Part1/number_2_string.png)
+
+#### Convert boolean to number or string
+
+```
+console.log(Number(true));
+console.log(Number(false));
+
+console.log(String(true));
+console.log(String(false));
+console.log((true).toString());
+console.log((false).toString());
+```
+
+![](/Screenshots/JS_Fun_Part1/boolean_2_number_or_string.png)
+
+#### Convert to boolean
+
+- Trong JavaScript kiểu dữ liệu boolean bao gồm 2 giá trị truthly và falsy (tham khảo thêm tại phần [Boolean](#c-boolean)), do đó nếu chúng ta ép kiểu Boolean cho _truthly values_ thì kết quả trả về _true_ còn nếu _falsy values_ thì kết quả trả về là _false_.
+
+```
+console.log(Boolean(0))
+console.log(Boolean(undefined));
+console.log(Boolean(null))
+console.log(Boolean(""))
+
+console.log(Boolean(1))
+console.log(Boolean("hello"))
+console.log(Boolean({}))
+```
+
+![](/Screenshots/JS_Fun_Part1/boolean_convert.png)
+
+**Tham khảo thêm ở Conversion Table:**
+
+![](/Screenshots/JS_Fun_Part1/conversion_table.png)
+
+### Type Coercion
+
+- Khác với các ngôn ngữ khác, JavaScript có chức năng tự động ép kiểu kiểu dữ liệu từ dữ liệu này sang dữ liệu khác để phù hợp cho từng câu lệnh cụ thể, thay vì chúng ta phải ép kiểu bằng cách thủ công.
+- Trong các phép toán tử, khi JavaScript gặp toán tử cộng thì sẽ ép kiểu dữ liệu từ _number_ thành _string_, nếu gặp toán tử trừ nhân chia thì sẽ ép kiểu dữ liệ từ _string_ thành _number_.
+
+```
+console.log("I'm " + 23 + " years old");
+console.log(23 - "3");
+console.log("2" * 3);
+console.log("20" / "5");
+```
+
+![](/Screenshots/JS_Fun_Part1/type_coercion.png)
+
+- Ngoài ra JavaScript còn tự động ép kiểu khi chúng ta thực hiện câu lệnh if. Ví dụ:
+
+```
+let money = 100;
+if (money) {
+  console.log("Don't spend it all :)")
+} else {
+  console.log("You should get a job!")
+}
+```
+
+![](/Screenshots/JS_Fun_Part1/coercion_boolean_1.png)
+
+Trong ví dụ trên do biến money có kiểu dữ liệu là number và có giá trị là 100, nên biến money được tự động ép kiểu sang boolean và có giá trị là _true_. Do đó câu lệnh trong block if được thực hiện.
+
+- Một ví dụ điển hình khác là chúng ta kiểm tra xem biến đó đã được gán giá trị hay chưa:
+
+```
+let checkVariable;
+if (checkVariable) {
+  console.log("Yay, checkVariable is defined!")
+} else {
+  console.log("checkVariable is UNDEFINED!")
+}
+```
+
+![](/Screenshots/JS_Fun_Part1/coercion_boolean_2.png)
+
+Trong ví dụ trên, do biến **checkVariable** khai báo nhưng chưa gán gán giá trị nên JavaScript đã tự động gán giá trị cho biến đó là _undefined_, và do _undefined_ là một _falsy value_ nên khi được tự động ép kiểu qua boolean được trả về giá trị là _false_. Do đó câu lệnh trong block else đã được thực hiện.
+
+## 10. Switch Stament
+
+- Tương tự như câu lệnh if/else, câu lệnh switch được sử dụng khi chúng ta muốn so sánh một giá trị với nhiều điều kiện khác nhau.
+- Cấu trúc:
+
+```
+const weather = "sunny";
+switch (weather) {
+  case "sunny":
+    console.log("You should hang out");
+    break;
+  case "rainy":
+    console.log("You should stay at home");
+    break;
+  default:
+    console.log("Not a valid weather");
+}
+```
+
+![](/Screenshots/JS_Fun_Part1/switch.png)
+
+## 11. Condition Operator
+
+- Toán tử điều kiện hay còn gọi là toán tử ba ngôi là cách viết câu lệnh if/else đơn giản trong 1 câu lệnh.
+- Toán tử ba ngôi thường được sử dụng trong các trường hợp khi chúng ta muốn khai báo biến, trong đó giá trị của biến được xác định bằng những điều kiện đơn giản (câu lệnh if/else).
+- Ví dụ:
+
+```
+const age = 19;
+drink = age >= 18 ? "wine 🍷" : "water 💧";
+
+console.log(`I like to drink ${drink}`);
+```
+
+![](/Screenshots/JS_Fun_Part1/condition_operator.png)

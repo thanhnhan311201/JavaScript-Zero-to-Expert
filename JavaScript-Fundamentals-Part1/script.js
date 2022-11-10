@@ -1,8 +1,4 @@
-const age = 18;
+const age = 19;
+drink = age >= 18 ? "wine 🍷" : "water 💧";
 
-if (age >= 18) {
-  console.log("You can start driving license.");
-} else {
-  const yearLeft = 18 - age;
-  console.log(`You is too young. Wait another ${yearLeft} years.`);
-}
+console.log(`I like to drink ${drink}`);
