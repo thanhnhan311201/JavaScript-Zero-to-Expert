@@ -1,6 +1,6 @@
 ##### Table of content
 
-- [Lý thuyết nền tảng về JavaScript](#lý-thuyết-nền-tảng-về-javascript)
+- [Lý thuyết nền tảng về JavaScript - Part 1](#lý-thuyết-nền-tảng-về-javascript---part-1)
   - [1. JavaScript là gì?](#1-javascript-là-gì)
   - [2. Các quy ước khai báo biến trong JavaScript](#2-các-quy-ước-khai-báo-biến-trong-javascript)
   - [3. Các loại dữ liệu trong JavaScript](#3-các-loại-dữ-liệu-trong-javascript)
@@ -39,7 +39,7 @@
   - [10. Switch Stament](#10-switch-stament)
   - [11. Condition Operator](#11-condition-operator)
 
-# Lý thuyết nền tảng về JavaScript
+# Lý thuyết nền tảng về JavaScript - Part 1
 
 ## 1. JavaScript là gì?
 
@@ -206,7 +206,7 @@ console.log(typeof firstName);
 
 - Output:
 
-![](/Screenshots/typeof_output.png)
+![](/Screenshots/JS_Fun_Part1/typeof_output.png)
 
 ## 4. Các cách khai báo biến trong JavaScript
 
