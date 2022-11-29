@@ -8,6 +8,26 @@
     - [Function Expressions](#function-expressions)
     - [Sự khác biệt giữa Function Declarations và Function Expressions](#sự-khác-biệt-giữa-function-declarations-và-function-expressions)
     - [Arrow Functions](#arrow-functions)
+  - [4. Array](#4-array)
+    - [Khai báo Array](#khai-báo-array)
+    - [Truy xuất các phần tử trong Array](#truy-xuất-các-phần-tử-trong-array)
+    - [Các kiểu dữ liệu có thể sử dụng trong Array](#các-kiểu-dữ-liệu-có-thể-sử-dụng-trong-array)
+    - [Các phương thức cơ bản của Array](#các-phương-thức-cơ-bản-của-array)
+      - [push(), unshift()](#push-unshift)
+      - [pop(), shift()](#pop-shift)
+      - [indexOf(), includes()](#indexof-includes)
+  - [5. Object](#5-object)
+    - [Khái niệm Object và cách khai báo](#khái-niệm-object-và-cách-khai-báo)
+    - [Cách truy xuất giá trị trong Object](#cách-truy-xuất-giá-trị-trong-object)
+    - [Cách thêm thuộc tính mới trong Object](#cách-thêm-thuộc-tính-mới-trong-object)
+    - [Object Methods](#object-methods)
+  - [6. Iteration](#6-iteration)
+    - [The for Loop](#the-for-loop)
+      - [Khái niệm và cách sử dụng](#khái-niệm-và-cách-sử-dụng)
+      - [Vòng lặp for trong Array](#vòng-lặp-for-trong-array)
+      - [Continue và Break](#continue-và-break)
+      - [Loops in Loops](#loops-in-loops)
+    - [The while Loop](#the-while-loop)
 
 # Lý thuyết nền tảng về JavaScript - Part 2
 
@@ -257,3 +277,544 @@ console.log(yearsUntilRetirement(2001, "Nhan"));
 ```
 
 ![](/Screenshots/JS_Fun_Part2/arrowFunctions.png)
+
+## 4. Array
+
+### Khai báo Array
+
+- Trong JavaScript, có 2 cách để khai báo một Array.
+
+**Cách 1: Literal Syntax**
+
+```
+const array = ["Nhan Phan", 21, "male"]
+```
+
+**Cách 2: Sử dụng từ khóa new**
+
+```
+const array = new Array("Nhan Phan", 21, "male")
+```
+
+### Truy xuất các phần tử trong Array
+
+- Để truy xuất các phần tử trong Array, chúng ta sẽ dùng dấu ngoặc vuông [], trong dấu ngoặc vuông chúng ta sẽ điền một số tuong ứng với vị trí của phần tử mà chúng ta muốn truy xuất.
+- Một điều lưu ý, vị trí _(index)_ của _array_ được đánh số từ 0 tới n-1.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+console.log(array[0])
+console.log(array[1])
+console.log(array[2])
+
+// Nhan Phan
+// 21
+// male
+```
+
+- Chúng ta có thể truy xuất phần tử cuối cùng trong mảng bằng phương thức `array.length`, phương thức đó sẽ trả về số phần tử có trong mảng.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+console.log(array[array.length -1])
+
+Output:
+// male
+```
+
+- Ngoài việc truy xuất và lấy giá trị của phần tử trong array, chúng ta có thể sử dụng dấu ngoặc vuông để thay đổi giá trị của phần tử mà chúng ta muốn.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+console.log(array)
+array[1] = 22
+console.log(array)
+
+// ['Nhan Phan', 21, 'male']
+// ['Nhan Phan', 22, 'male']
+```
+
+- Một điều lưu ý, khi chúng ta khai báo một array bằng từ khóa const thì chúng ta vẫn có thể thay đổi giá trị của các phần tử có trong array, tuy nhiên chúng ta không thể nào thay đổi nguyên một array.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+array = ["Nhan Phan", 21]
+console.log(array)
+
+// Uncaught TypeError: Assignment to constant variable.
+```
+
+### Các kiểu dữ liệu có thể sử dụng trong Array
+
+- Ngoài việc chứa các kiểu dữ liệu như _string_, _number_; array trong JavaScript có thể chứa các kiểu dữ liệu khác như _null_, _undefined_, _boolean_,... Ngoài ra có thể chứa một biến, một biểu thức hoặc thậm chí là một array khác.
+
+```
+const friends = ["Bao Phan", "Duc Huy"]
+const _name = "Nhan Phan"
+
+const infors = [_name, 2022 - 2001, "male", friends]
+
+console.log(infors)
+console.log(infors[3][0])
+
+// ['Nhan Phan', 21, 'male', ['Bao Phan', 'Duc Huy']]
+// Bao Phan
+```
+
+### Các phương thức cơ bản của Array
+
+#### push(), unshift()
+
+- `push()` là phương thức cho phép chúng ta thêm một phần tử vào cuối của array.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+array.push("Ho Chi Minh city")
+console.log(array)
+
+// ['Nhan Phan', 21, 'male', 'Ho Chi Minh city']
+```
+
+- Ngược lại với `push()`, `unshift()` là phương thức cho phép chúng ta thêm một phần tử vào đầu của array.
+
+```
+const array = ["Nhan Phan", 21, "male"]
+array.unshift("Ho Chi Minh city")
+console.log(array)
+
+// ['Ho Chi Minh city', 'Nhan Phan', 21, 'male']
+```
+
+- Cả phương thức `push()` và `unshift()` đều trả về kích thước mới của array.
+
+```
+const array = ["Nhan Phan", 21]
+console.log(array.push("Ho Chi Minh city"))
+console.log(array)
+console.log(array.unshift("male"))
+console.log(array)
+
+// 3
+// ['Nhan Phan', 21, 'Ho Chi Minh city']
+// 4
+// ['male', 'Nhan Phan', 21, 'Ho Chi Minh city']
+```
+
+#### pop(), shift()
+
+- Tương tự như 2 phương thức `push()` và `unshift()`, phương thức `pop()` được sử dụng để xóa phần tử cuối cùng của array, còn phương thức `shift()` được sử dụng để xóa phần tử đầu tiên của array.
+- Và cả 2 phương thức trên đều trả về phần tử bị xóa.
+
+```
+const array = ["Ho Chi Minh city", "Nhan Phan", 21, "male"]
+const lastElement = array.pop()
+const firstElement = array.shift()
+
+console.log(array)
+console.log(lastElement)
+console.log(firstElement)
+
+// ['Nhan Phan', 21]
+// male
+// Ho Chi Minh city
+```
+
+#### indexOf(), includes()
+
+- Phương thức `indexOf()` được sử dụng để lấy vị trí của phần tử mà chúng ta mong muốn, nếu phần tử có trong mảng thì phương thức sẽ trả về vị trí tương ứng, ngược lại sẽ trả về -1.
+
+```
+const array = ["Ho Chi Minh city", "Nhan Phan", 21, "male"]
+console.log(array.indexOf("Bao Phan"))
+console.log(array.indexOf("male"))
+
+// -1
+// 3
+```
+
+- Phương thức `includes()` sẽ tương tự như phương thức `indexOf()`, trả về _true_ nếu phần tử có trong array, _fale_ nếu phần tử không có trong array.
+
+```
+const array = ["Ho Chi Minh city", "Nhan Phan", 21, "male"]
+console.log(array.includes("Bao Phan"))
+console.log(array.includes("male"))
+
+// false
+// true
+```
+
+## 5. Object
+
+### Khái niệm Object và cách khai báo
+
+- Đối với kiểu dữ liệu Array, mỗi giá trị của từng phần tử trong Array đều "định danh" thông qua vị trí của từng phần tử đó, nên chúng ta chỉ có thể truy xuất từng phần tử bằng vị trí.
+- Trong JavaScript có một kiểu dữ liệu cho phép chúng ta đặt tên từng giá trị ở bên trong, và chúng ta có thể truy xuất các giá trị đó thông qua tên của từng phần tử đấy. Đó là kiểu dữ liệu Object.
+- Từng phần tử trong Object sẽ được biểu diễn theo từng cặp name-value (key-value), khác với Array các phần tử sẽ được chứa trong dấu ngoặc vuông [], đối với Object sẽ là dấu ngoặc nhọn {}.
+- Cú pháp khai báo:
+
+```
+const newObject = {
+  key: value,
+  key: value,
+  ...
+}
+```
+
+- Ví dụ:
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  age: 21,
+  gender: "male"
+}
+
+console.log(student)
+
+// {firstName: "Phan", lastName: "Nhan", age: 21, gender: "male"}
+```
+
+- Giá trị của một thuộc tính ngoài các kiểu dữ liệu nguyên thủy như: _number_, _string_, _boolean_,... thì object có thể chứa các giá trị khác như _array_, _object_, hoặc thậm chí là một function. Như đã được nhắc trong phần [Function Expressions](#function-expressions), function là một dạng giá trị nên object vẫn có thể chứa nó.
+
+### Cách truy xuất giá trị trong Object
+
+- Đối với Array, thứ tự các phần tử trong Array cực kỳ quan trọng. Vì chúng ta truy xuất các phần tử trong Array bằng vị trí tương ứng của các phần tử.
+- Ngược lại với Array, thứ tự các phần tử trong Object không quan trọng, bởi vì chúng ta sẽ giá trị của các phần tử thông qua key (tên của thuộc tính).
+- Có 2 cách để lấy giá trị từ một thuộc tính trong Object:
+
+  - **Dot Notation**
+
+    - Cách đầu tiên là sử dụng **dấu chấm '.'** . Chúng ta sẽ truy xuất giá trị của một thuộc tính bằng cách sử dụng dấu chấm phía sau Object, sau đó là tên của thuộc tính. - Ví dụ:
+
+    ```
+    const student = {
+      firstName: "Phan",
+      lastName: "Nhan",
+      age: 21,
+      gender: "male"
+    }
+
+    console.log(student.lastName)
+
+    // "Nhan"
+    ```
+
+    - Đối với cách sử dụng dấu chấm, thì chúng ta phải truyền vào thuộc tính hoàn chỉnh cuối cùng, như ví dụ ở trên là "lastName", không được truyền vào một biến hay một biểu thức.
+
+  - **Bracket Notation**
+
+    - Cách thứ hai là sử dụng **dấu ngoặc vuông []**. Khác với cách trên, chúng ta sẽ sử dụng dấu ngoặc vuông để truy xuất giá trị của một thuộc tính.
+    - Đầu vào truyền vô là tên của một thuộc tính được viết dưới dạng chuỗi, ngoài ra chúng ta có thể truyền vô một biến hoặc một biểu thức.
+    - Ví dụ:
+
+    ```
+    const student = {
+      firstName: "Phan",
+      lastName: "Nhan",
+      age: 21,
+      gender: "male"
+    }
+
+    const nameKey = 'Name';
+    console.log(student[`last${nameKey}`])
+    console.log(student['age'])
+
+    // "Nhan"
+    // 21
+    ```
+
+- Trong JavaScript, khi chúng ta truy xuất một giá trị của thuộc tính chưa được khai báo, thì kết quả được trả về _undefined_.
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  age: 21,
+  gender: "male"
+}
+
+console.log(student.city)
+
+// undefined
+```
+
+### Cách thêm thuộc tính mới trong Object
+
+- Để thêm thuộc tính mới trong Object, chúng ta sử dụng **dot notation** hoặc **bracket notation** để tạo thuộc tính mới, sau đó gán giá trị mới cho chúng.
+- Ví dụ:
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  age: 21,
+};
+
+student.gender = "male";
+student['city'] = "Ho Chi Minh city";
+console.log(student);
+
+// {firstName: "Phan", lastName: "Nhan", age: 21, gender: "male", city: "Ho Chi Minh city"}
+```
+
+### Object Methods
+
+- Như đã được nhắn trong phần định nghĩa khái niệm của Object, chúng ta có thể khai báo một biểu thức hàm như giá trị của một thuộc tính trong object. Và khi một hàm được gắn vào một object thì sẽ được coi là phương thức của object đó.
+- Ví dụ:
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  birthYear: 2001,
+  gender: "male",
+
+  calcAge: function (birthYear) {
+    return 2022 - birthYear;
+  }
+}
+
+console.log(student.calcAge(2001))
+
+// 21
+```
+
+- Ở ví dụ trên là chúng ta đang truyền vào tham số **birthYear** từ bên ngoài vào phương thức **calcAge()**, để có thể sử dụng được thuộc tính **birthYear** trực tiếp bên của đối tượng **student**, chúng ta sẽ sử dụng một biến đặc biệt mà JavaScript đã cung cấp, đó là từ khóa **this**.
+- Từ khóa **this** đại diện cho object phương thức này gọi, nói cách khác từ khóa **this** sẽ bằng đối tượng gọi phương thức.
+- Ví dụ:
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  birthYear: 2001,
+  gender: "male",
+
+  calcAge: function () {
+    console.log(this)
+  }
+}
+
+console.log(student.calcAge())
+
+// {firstName: 'Phan', lastName: 'Nhan', birthYear: 2001, gender: 'male', calcAge: ƒ}
+```
+
+- Như ví dụ trên có thể thay khi chúng ta log từ khóa **this** ra thì kết quả chúng ta nhận được là đối tượng **student**. Vì lúc này đối tượng đang gọi phương thức **calcAge()** là **student**, nên từ khóa **this** sẽ bằng đối tượng **student**.
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  birthYear: 2001,
+  gender: "male",
+
+  calcAge: function (currentYear) {
+    this.age = currentYear - this.birthYear;
+    return this.age;
+  },
+};
+
+console.log(student.calcAge(2022));
+console.log(student.age);
+
+// 21
+// 21
+```
+
+```
+const student = {
+  firstName: "Phan",
+  lastName: "Nhan",
+  birthYear: 2001,
+  job: "Software Engineer",
+  hasDriversLicense: true,
+
+  calcAge: function () {
+    this.age = 2022 - this.birthYear;
+    return this.age;
+  },
+
+  getSumnary: function () {
+    return `${this.lastName} is a ${this.calcAge()}-years old ${
+      this.job
+    }, and he has ${
+      this.hasDriversLicense === true ? "a" : "no"
+    } driver's license`;
+  },
+};
+
+console.log(student.getSumnary());
+
+// Nhan is a 21-years old Software Engineer, and he has driver's license
+```
+
+## 6. Iteration
+
+- Vòng lặp cho phép chúng ta lặp đi lặp lại những câu lệnh giống hệt nhau.
+- Ở trong JavaScript có 2 dạng vòng lặp: for loop và while loop.
+
+### The for Loop
+
+#### Khái niệm và cách sử dụng
+
+- Cấu trúc của vòng lặp for:
+
+```
+for (init counter, condition, increase or decrease counter) {
+  statement;
+}
+```
+
+- Cách của vòng lặp for thực thi là ban đầu vòng lặp sẽ tạo một biến counter, sau đó kiểm tra điều kiện của biến counter đó, nếu điều kiện trả về true thì sẽ thực thi các câu lệnh trong block, sau đó thực hiện việc tăng hoặc giảm biến counter. Sau 1 vòng lặp sẽ tiếp tục kiểm tra lại điều kiện, nếu đúng thì sẽ lặp lại như thế, nếu sai thì kết thúc (không thực thi các câu lệnh trong block nữa).
+- Cứ mỗi lần thực hiện lệnh trong block xong thì vòng lặp for sẽ tăng hoặc giảm counter.
+- Để hiểu hơn, chúng ta sẽ tạo một bộ đếm số tự nhiên từ 1 đến 10:
+
+Chúng ta sẽ lặp cho đến khi counter nhỏ hơn 11
+
+```
+for (let number = 1; number < 11; number++) {
+  console.log(number);
+}
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
+```
+
+#### Vòng lặp for trong Array
+
+- Để có truy xuất tất cả các phần tử có trong Array, thay vì chúng ta phải viết từng câu lệnh truy xuất, chúng ta có thể sử dụng vòng lặp for.
+- Ví dụ:
+
+```
+const student = ["Nhan", 21, "male"];
+
+console.log(student[0]);
+console.log(student[1]);
+console.log(student[2]);
+
+// Index starts at 0,
+// because the index of the first element of the array is 0
+for (let index = 0; index < student.length; index++) {
+  console.log(student[index]);
+}
+
+// Nhan
+// 21
+// male
+// Nhan
+// 21
+// male
+```
+
+#### Continue và Break
+
+- Continue và Break là 2 câu lệnh quan trọng trong vòng lặp for.
+- Continue là câu lệnh tiếp tục vòng lặp tiếp theo, nó sẽ bỏ qua những câu lệnh ở sau nó.
+
+```
+const student = ["Nhan", 2001, 21, "male"];
+
+for (let i = 0; i < student.length; i++) {
+  if (typeof student[i] === "number") {
+    continue;
+  }
+  console.log(student[i]);
+}
+
+// "Nhan"
+// "male"
+```
+
+Ở ví dụ trên vòng lặp chỉ in ra các giá trị nào không phải là _number_, do đó khi câu lệnh kiểm tra điều kiện phần tử nào là number thì tiếp tục vòng lặp tiếp theo và bỏ qua câu lệnh log ở bên dưới.
+
+- Break là câu lệnh kết thúc vòng lặp ngay lập tức.
+
+```
+for (let i = 1; i < 10; i++) {
+  if (i === 5) {
+    break;
+  }
+  console.log(i);
+}
+
+// 1
+// 2
+// 3
+// 4
+```
+
+Ở ví dụ trên chúng ta đang đếm số từ 1 tới 9, tuy nhiên khi đếm tới số 5 do có câu lệnh break, nên nguyên vòng lặp for của chúng ta bị kết thúc, nên các số sau đó như 6 7 8 9 không được log ra.
+
+#### Loops in Loops
+
+- Chúng ta có thể tích hợp nhiều vòng lặp for lồng vào nhau.
+- Về cơ chế khi vòng lặp bên ngoài bắt đầu vòng lặp đầu tiên, thì vòng lặp bên trong sẽ lặp qua hết tất cả các vòng lặp của nó, sau đó vòng lặp bên ngoài sẽ tiếp tục vòng lặp tiếp theo.
+- Để hiểu rõ hơn, quan sát ví dụ sau:
+
+```
+const dates = ["Monday", "Tuesday", "Wednesday"];
+const weeks = ["first week", "second week"];
+
+for (let week = 0; week <= weeks.length; week++) {
+  for (let date = 0; date < dates.length; date++) {
+    console.log(`Today is ${dates[date]} of the ${weeks[week]}`);
+  }
+}
+
+// Today is Monday of the first week
+// Today is Tuesday of the first week
+// Today is Wednesday of the first week
+// Today is Monday of the second week
+// Today is Tuesday of the second week
+// Today is Wednesday of the second week
+// Today is Monday of the undefined
+// Today is Tuesday of the undefined
+// Today is Wednesday of the undefined
+```
+
+Như ở ví dụ trên, khi vòng lặp weeks bắt đầu lặp vòng lặp đầu tiên, thì vòng lặp dates sẽ log ra tất các date có trong mảng dates, sau đó vòng lặp weeks mới lặp vòng lặp tiếp theo.
+
+### The while Loop
+
+- Khác với vòng lặp for, chúng ta chỉ sử dụng vòng lặp for khi chúng biết trước giới hạn của vòng lặp là bao nhiêu lần. Còn đối với vòng lặp while được sử dụng khi chúng ta không biết trước vòng lặp này sẽ chạy bao nhiêu lần, do đó vòng lặp while không cần biến counter và cũng như phải tăng hoặc giảm biến counter. Và đó là ý nghĩa cũng như sự khác biệt của vòng lặp while so với vòng lặp for.
+- Tuy nhiên vòng lặp while sẽ được sử dụng "linh động" hơn so với vòng lặp for, chúng ta có thể sử dụng vòng lặp while với biến counter như vòng lặp for.
+- Cấu trúc vòng lặp while:
+
+```
+while (condition) {
+  statement;
+}
+```
+
+- Mỗi lần lặp, vòng lặp while sẽ kiểm tra điều kiện trước, nếu true thì sẽ thực thi các câu lệnh trong block sau đó tiếp tục vòng lặp, nếu false thì sẽ kết thúc vòng lặp.
+- Ví dụ:
+
+Chúng ta sẽ lắc con xúc xắc ngẫu nhiên, nếu con số của xúc xắc không phải là số 6 thì in ra màn hình và tiếp tục lắc xúc xắc, nếu là số 6 thì kết thúc
+
+```
+let dice = Math.trunc(Math.random() * 6) + 1;
+while (dice !== 6) {
+  console.log(`You rolled a ${dice}`);
+
+  dice = Math.trunc(Math.random() * 6) + 1;
+
+  if (dice === 6) {
+    console.log(`Your last dice is ${dice}. Loop is about to end...`);
+  }
+}
+
+// You rolled a 4
+// You rolled a 5
+// You rolled a 1
+// Your last dice is 6. Loop is about to end...
+```
