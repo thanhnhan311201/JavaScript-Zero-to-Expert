@@ -1,0 +1,23 @@
+{
+  "name": "javascript-zero-to-expert",
+  "version": "1.0.0",
+  "description": "- Cơ chế về xử lý bất đồng bộ.\r - Cơ chế Event Loop\r - Cơ chế Message Queue",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch ./Promise-Fetch/JSON-server/db.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanhnhan311201/JavaScript-Zero-to-Expert.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thanhnhan311201/JavaScript-Zero-to-Expert/issues"
+  },
+  "homepage": "https://github.com/thanhnhan311201/JavaScript-Zero-to-Expert#readme",
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
