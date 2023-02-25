@@ -4,6 +4,10 @@
   - [Asynchronous JavaScript, AJAX and APIs](#asynchronous-javascript-ajax-and-apis)
     - [Asynchronous JavaScript](#asynchronous-javascript)
     - [AJAX](#ajax)
+    - [APIs](#apis)
+  - [Promise](#promise)
+    - [Định nghĩa](#định-nghĩa)
+    - [Promise Life](#promise-life)
 
 # Asynchronous JavaScript: Promises, Async/Await, and AJAX
 
@@ -57,6 +61,68 @@ Nếu đúng như trong tư duy đồng bộ, thì khi JavaScript gặp đoạn 
 
 ### AJAX
 
-- AJAX là viết tắt bởi của **A**synchronous **J**avaScript **A**nd **X**ML.
-- AJAX cho phép chúng ta giao tiếp với remote server theo cách không đồng bộ.
+- AJAX được viết tắt bởi **A**synchronous **J**avaScript **A**nd **X**ML.
+- AJAX cho phép chúng ta giao tiếp với remote server theo cách bất đồng bộ.
 - Chúng ta sẽ thực hiện các lệnh gọi AJAX để yêu cầu lấy dữ liệu từ server một cách linh hoạt mà không cần phải reload lại trang web.
+
+### APIs
+
+- API được viết tắt bởi **A**pplication **P**rogramming **I**nterface.
+- API đơn giản là một ứng dụng được xây dựng để các ứng dụng sử dụng với mục đích giao tiếp, truyền tải dữ liệu giữa các ứng dụng.
+- Có rất nhiều API khác nhau trong lập trình web, ví dụ như: **DOM API**, **Geolocation API**,...
+- Chúng ta có thể tạo một API từ một object, trong đó cung cấp các method để có ứng dụng khác có thể tương tác sử dụng. Chúng ta gọi đó là **Own Class API**.
+- **"Online" API** (Web API/API) là một API được xây dựng và chạy trên một remote server, API có chức năng cho phép client và server tương tác với nhau thông qua giao thức HTTP. Khi client gửi một request lấy dữ liệu thì API này sẽ có nhiệm vụ tiếp nhận request, tìm kiếm dữ liệu trong cơ sở dữ liệu và sau đó gửi data về cho client thong qua respone.
+- Ngoài việc lấy dữ liệu thì chúng ta có thể sử dụng **"Online" API** cho nhiều task khác.
+
+## Promise
+
+### Định nghĩa
+
+- Giả sử chúng cần xử lý những task bất đồng bộ có liên quan với nhau và có tính tuần tự, thì chúng ta bắt buộc vào lồng các callback function với nhau để xử lý, ví dụ:
+
+```
+setTimeout(function () {
+  console.log(1);
+  setTimeout(function () {
+    console.log(2);
+    setTimeout(function () {
+      console.log(3);
+      setTimeout(function () {
+        console.log(4);
+      });
+    });
+  });
+});
+```
+
+- Tuy nhiên điều này dễ dẫn tới callback hell, thay vào đó chúng ta nên sử dụng một tính năng mới trong ES6 để xủ lý là **Promise**.
+
+![](../Screenshots/Asynchronous-JavaScript/promise.jpeg)
+
+- Về cơ bản Promise là một object được sử dụng như một vùng chứa các giá trị không đồng bộ.
+- Với việc sử dụng Promise sẽ giải quyết được vấn đề callback hell, thao tác các task có tính chất tuần tự dễ dàng hơn, code trong đẹp hơn và cũng như giúp chúng ta dễ dàng xử lý các thao tác bất đồng bộ hơn (ví dụ như AJAX call thì không cần phải sử dụng event "load").
+- Cách khởi tạo Promise: dùng từ khóa new để khởi tạo Promise, tham số truyền vào một hàm thực thi (executor function).
+
+```
+const promise = new Promise(
+  // Executor function
+  function (resolve, reject) {
+    // Logic:
+    // statement...
+
+    // Gọi resolve khi thao tác xử lý logic thành công.
+    // Tham số truyền vào là dữ liệu trả về cho phương thức then()
+    resolve();
+
+    // Gọi reject khi thao tác xử lý logic thất bại.
+    // Tham số truyền vào là dữ liệu trả về cho phương thức catch()
+    reject();
+  }
+);
+```
+
+### Promise Lifecycle
+
+![](../Screenshots/Asynchronous-JavaScript/promise-lifecycle.png)
+
+- Promise có 3 trạng thái: pending (là trạng thái đang chờ resolve hoặc reject), fulfilled (là trạng thái khi promise thực thi thành công và gọi resolve), reject (là trạng thái khi promise thực thi thất bại và gọi reject).

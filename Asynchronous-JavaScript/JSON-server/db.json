@@ -2,50 +2,50 @@
   "courses": [
     {
       "id": 1,
-      "name": "Kiến Thức Nhập Môn IT",
+      "title": "Kiến Thức Nhập Môn IT",
       "description": "Để có cái nhìn tổng quan về ngành IT - Lập trình web các bạn nên xem các videos tại khóa này trước nhé.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/7.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/7.png"
     },
     {
-      "name": "HTML CSS từ Zero đến Hero",
+      "title": "HTML CSS từ Zero đến Hero",
       "description": "Trong khóa này chúng ta sẽ cùng nhau xây dựng giao diện 2 trang web là The Band & Shopee.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/2.png",
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/2.png",
       "id": 2
     },
     {
       "id": 3,
-      "name": "Responsive Với Grid System",
+      "title": "Responsive Với Grid System",
       "description": "Trong khóa này chúng ta sẽ học về cách xây dựng giao diện web responsive với Grid System, tương tự Bootstrap 4.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/3.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/3.png"
     },
     {
       "id": 4,
-      "name": "Lập Trình JavaScript Cơ Bản",
+      "title": "Lập Trình JavaScript Cơ Bản",
       "description": "Học Javascript cơ bản phù hợp cho người chưa từng học lập trình. Với hơn 100 bài học và có bài tập thực hành sau mỗi bài học.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/1.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/1.png"
     },
     {
       "id": 5,
-      "name": "Lập Trình JavaScript Nâng Cao",
+      "title": "Lập Trình JavaScript Nâng Cao",
       "description": "Hiểu sâu hơn về cách Javascript hoạt động, tìm hiểu về IIFE, closure, reference types, this keyword, bind, call, apply, prototype, ...",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/12.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/12.png"
     },
     {
       "id": 6,
-      "name": "Làm việc với Terminal & Ubuntu",
+      "title": "Làm việc với Terminal & Ubuntu",
       "description": "Sở hữu một Terminal hiện đại, mạnh mẽ trong tùy biến và học cách làm việc với Ubuntu là một bước quan trọng trên con đường trở thành một Web Developer.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/14/624faac11d109.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/14/624faac11d109.png"
     },
     {
       "id": 8,
-      "name": "Node & ExpressJS",
+      "title": "Node & ExpressJS",
       "description": "Học Back-end với Node & ExpressJS framework, hiểu các khái niệm khi làm Back-end và xây dựng RESTful API cho trang web.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/6.png"
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/6.png"
     },
     {
-      "name": "App \"Đừng Chạm Tay Lên Mặt\"",
+      "title": "App \"Đừng Chạm Tay Lên Mặt\"",
       "description": "Xây dựng ứng dụng đưa ra cảnh báo khi người dùng sờ tay lên mặt. Chúng ta sẽ sử dụng thư viện ReactJS & Tensoflow để hoàn thiện ứng dụng này.",
-      "image": "https://files.fullstack.edu.vn/f8-prod/courses/4/61a9e9e701506.png",
+      "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/4/61a9e9e701506.png",
       "id": 9
     }
   ]
