@@ -57,8 +57,8 @@ promise
 // ẩn loader.
 // - Khi server xử lý thành công và trả về dữ liệu, thì dữ liệu sẽ được trả về thông qua resolve(-data-), rồi chúng ta sẽ
 // sử dụng phương thức then(-data-) để render dữ liệu mà server trả về.
-// - Trong trường hợp server xử lý không thành công (không tìm thấy dữ liệu yêu cầu,...) thì server sẽ trả về dữ liệu
-// (error message,...) thông qua reject(-error message-), sau đó chúng ta sẽ sử dụng .catch(-error message-) để hiển thị trên
+// - Trong trường hợp server xử lý không thành công (không tìm thấy dữ liệu yêu cầu, rớt mạng,...) thì server sẽ trả về dữ
+// liệu (error message,...) thông qua reject(-error message-), sau đó chúng ta sẽ sử dụng .catch(-error message-) để hiển thị trên
 // browser.
 // - Một điều lưu ý quan trọng khi sử dụng Promise đó là lúc nào cũng phải có phương thức catch, bởi vì trong môi trường thực
 // tế chúng ta không thể nào đảm bảo promise được sử lý thành công, đôi lúc sẽ có lỗi, nên chúng ta phải handle bug bằng
