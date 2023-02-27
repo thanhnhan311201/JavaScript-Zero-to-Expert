@@ -12,6 +12,11 @@
     - [Promise đặc biệt](#promise-đặc-biệt)
     - [Bắt lỗi thủ công](#bắt-lỗi-thủ-công)
   - [Event Loop](#event-loop)
+  - [Async / Await](#async--await)
+    - [Định nghĩa](#định-nghĩa-1)
+    - [Xử lý lỗi trong Async / Await](#xử-lý-lỗi-trong-async--await)
+    - [Trả về giá trị trong Async Function](#trả-về-giá-trị-trong-async-function)
+    - [Promise Combinators: all, race, allSettled và any](#promise-combinators-all-race-allsettled-và-any)
 
 # Asynchronous JavaScript: Promises, Async/Await, and AJAX
 
@@ -274,6 +279,180 @@ Nếu đúng như trong tư duy đồng bộ, thì khi JavaScript gặp đoạn 
 
 ![](../Screenshots/Asynchronous-JavaScript/event-loop.png)
 
-- Note: những callback của Promise sẽ được truyền vào micro-tasks queue và nó có độ ưu tiên cao hơn các callback trong callback queue thông thường, do đó các callback trong micro-tasks queue sẽ được ưu tiên đưa vào callstack thục thi trước toàn bộ rồi mới tới lượt các callback trong callback queue.
+- Note: những callback của Promise sẽ được truyền vào micro-tasks queue và nó có độ ưu tiên cao hơn các callback trong callback queue thông thường, do đó các callback trong micro-tasks queue sẽ được ưu tiên đưa vào callstack thực thi trước toàn bộ rồi mới tới lượt các callback trong callback queue.
 
 Tham khảo: [Hiểu về cơ chế xử lý sự kiện Event Loop trong Javascript](https://viblo.asia/p/hieu-ve-co-che-xu-ly-su-kien-event-loop-trong-javascript-07LKXjX2lV4)
+
+## Async / Await
+
+### Định nghĩa
+
+- **Async** / **Await** là một tính năng của JavaScript giúp chúng ta làm việc với các hàm bất đồng bộ theo cách thú vị hơn và dễ hiểu hơn. Nó được xây dựng trên Promises và tương thích với tất cả các Promise dựa trên API.
+- **Async** - khai báo một hàm bất đồng bộ (async function someName(){...}):
+
+  - Tự động biến đổi một hàm thông thường thành một Promise.
+  - Khi gọi tới hàm async nó sẽ xử lý mọi thứ và được trả về kết quả trong hàm của nó.
+  - Async cho phép sử dụng Await.
+
+- **Await** - tạm dừng việc thực hiện các hàm async (var result = await someAsyncCall() ):
+
+  - Khi được đặt trước một Promise, nó sẽ đợi cho đến khi Promise kết thúc và trả về kết quả.
+  - Await chỉ làm việc với Promises, nó không hoạt động với callbacks.
+  - Await chỉ có thể được sử dụng bên trong các function async.
+
+- Ví dụ:
+
+  ```
+  const sleep = (ms) =>
+    new Promise(function (resolve) {
+      setTimeout(resolve, ms);
+    });
+
+  // promise thuần
+  sleep(1000)
+    .then(() => {
+      console.log(1);
+      return sleep(1000);
+    })
+    .then(() => {
+      console.log(2);
+      return sleep(1000);
+    })
+    .then(() => {
+      console.log(3);
+      return sleep(1000);
+    });
+
+  // async, await
+  (async () => {
+    await sleep(1000);
+    console.log(1);
+    await sleep(1000);
+    console.log(2);
+    await sleep(1000);
+    console.log(3);
+  })();
+  ```
+
+### Xử lý lỗi trong Async / Await
+
+- Một điều tuyệt vời khác về Async / Await là nó cho phép chúng ta bắt các lỗi không mong đợi bằng cách sử dụng try / catch. Chúng ta chỉ cần để các await call của chúng ta vào trong khối try/catch như sau:
+
+  ```
+  async function doSomethingAsync(){
+      try {
+          // This async call may fail.
+          let result = await someAsyncCall();
+      }
+      catch(error) {
+          // If it does we will catch the error here.
+      }
+  }
+  ```
+
+### Trả về giá trị trong Async Function
+
+- Async Function sẽ trả về một promise, do đó chúng ta có thể sử dụng phương thức `then()` và `catch()` với function đó.
+- Những giá trị trả về trong async function sẽ được sử dụng trong phương thức `then()`, còn error được `throw` sẽ được sử dụng trong phương thức `catch()`.
+
+  ```
+  const whereAmI = async function () {
+    try {
+      // Geolocation
+      const pos = await getPosition();
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      // Reverse geocoding
+      const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+      if (!resGeo.ok) throw new Error('Problem getting location data');
+      const dataGeo = await resGeo.json();
+
+      // Country data
+      const res = await fetch(
+        `https://restcountries.eu/rest/v2/name/${dataGeo.country}`
+      );
+      if (!resGeo.ok) throw new Error('Problem getting country');
+      const data = await res.json();
+      renderCountry(data[0]);
+
+      return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+    } catch (err) {
+      console.error(`${err} 💥`);
+      renderError(`💥 ${err.message}`);
+
+      // Reject promise returned from async function
+      throw err;
+    }
+  };
+
+  whereAmI()
+    .then(city => console.log(`2: ${city}`))
+    .catch(err => console.error(`2: ${err.message} 💥`))
+    .finally(() => console.log('3: Finished getting location'));
+
+  // Một cách khác sử dụng Async / Await với async function mà không cần dùng then và catch
+  // (async function () {
+  //   try {
+  //     const city = await whereAmI();
+  //     console.log(`2: ${city}`);
+  //   } catch (err) {
+  //     console.error(`2: ${err.message} 💥`);
+  //   }
+  //   console.log('3: Finished getting location');
+  // })();
+  ```
+
+### Promise Combinators: all, race, allSettled và any
+
+```
+// Promise.race
+(async function () {
+  const res = await Promise.race([
+    getJSON(`https://restcountries.eu/rest/v2/name/italy`),
+    getJSON(`https://restcountries.eu/rest/v2/name/egypt`),
+    getJSON(`https://restcountries.eu/rest/v2/name/mexico`),
+  ]);
+  console.log(res[0]);
+})();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long!'));
+    }, sec * 1000);
+  });
+};
+
+Promise.race([
+  getJSON(`https://restcountries.eu/rest/v2/name/tanzania`),
+  timeout(5),
+])
+  .then(res => console.log(res[0]))
+  .catch(err => console.error(err));
+
+// Promise.allSettled
+Promise.allSettled([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+]).then(res => console.log(res));
+
+Promise.all([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+
+// Promise.any [ES2021]
+Promise.any([
+  Promise.resolve('Success'),
+  Promise.reject('ERROR'),
+  Promise.resolve('Another success'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.error(err));
+```
+
+Tham khảo: [Tìm hiểu một số phương thức của Promise](https://viblo.asia/p/tim-hieu-mot-so-phuong-thuc-cua-promise-ByEZkO3YZQ0)
