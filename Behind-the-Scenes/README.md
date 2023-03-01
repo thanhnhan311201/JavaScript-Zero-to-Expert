@@ -67,6 +67,8 @@ const nhan = {
 }
 ```
 
+Tham khảo: [Con trỏ this trong Javascript](https://viblo.asia/p/javascript-con-tro-this-trong-javascript-924lJpGbKPM)
+
 ## Primitive and Object
 
 ![](../Screenshots/Behind-the-Scenes/primitive-reference.jpeg)
